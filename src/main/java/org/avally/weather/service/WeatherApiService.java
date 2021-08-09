@@ -2,6 +2,7 @@ package org.avally.weather.service;
 
 import org.avally.weather.AppProperties;
 import org.avally.weather.model.Summary;
+import org.avally.weather.util.WeatherApiErrorHandler;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,9 @@ public class WeatherApiService {
     public WeatherApiService(AppProperties appProperties, RestTemplateBuilder restTemplateBuilder) {
         this.url = appProperties.getUrl();
         this.token = appProperties.getToken();
-        this.restTemplate = restTemplateBuilder.build();
+        this.restTemplate = restTemplateBuilder
+                .errorHandler(new WeatherApiErrorHandler())
+                .build();
     }
 
     public ResponseEntity<Summary> getWeatherFromApi(String city) {
