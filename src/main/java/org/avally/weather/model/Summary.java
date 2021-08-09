@@ -1,5 +1,6 @@
 package org.avally.weather.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Data;
 
@@ -22,5 +23,10 @@ public class Summary {
     @JsonSetter("dt")
     public void setDate(Long dateInSec) {
         this.date = new Date(dateInSec * 1000);
+    }
+
+    @JsonGetter("time")
+    public Date getDate() {
+        return date;
     }
 }
