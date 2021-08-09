@@ -17,4 +17,10 @@ public class Summary {
     private Coordinate coordinate;
     private Date date;
     private List<Weather> weather;
+
+//    Custom setter to convert incoming openweather api 'dt' timestamp (in seconds) to java Date object
+    @JsonSetter("dt")
+    public void setDate(Long dateInSec) {
+        this.date = new Date(dateInSec * 1000);
+    }
 }
